@@ -30,25 +30,25 @@ jobs:
           echo "Maven version :"
           mvn --version
        # Étape 4 : Compiler le projet
-       - name: Compiler
-         run: mvn clean compile
+      - name: Compiler
+        run: mvn clean compile
        # Étape 5 : Exécuter les tests
-       - name: Tests unitaires
-         run: mvn test
+      - name: Tests unitaires
+        run: mvn test
        # Étape 6 : Résultats
-       - name: Afficher résultats
-         if: always()
-         run: |
-           echo "=== RÉSULTATS ==="
-           if [ -f target/surefire-reports/com.exemple.CalculatorTest.txt ]; then
-             echo "Rapport de tests :"
-             cat target/surefire-reports/com.exemple.CalculatorTest.txt
-            else
-             echo "Aucun rapport trouvé"
-           fi
+      - name: Afficher résultats
+        if: always()
+        run: |
+          echo "=== RÉSULTATS ==="
+          if [ -f target/surefire-reports/com.exemple.CalculatorTest.txt ]; then
+            echo "Rapport de tests :"
+            cat target/surefire-reports/com.exemple.CalculatorTest.txt
+          else
+            echo "Aucun rapport trouvé"
+          fi
         # Étape 7 : Notifier en cas d'échec
-        - name: Notifier échec
-          if: failure()
-          run: |
+      - name: Notifier échec
+         if: failure()
+         run: |
             echo " TESTS ÉCHOUÉS"
             echo "Veuillez corriger les erreurs"
